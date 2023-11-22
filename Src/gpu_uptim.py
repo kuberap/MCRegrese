@@ -79,18 +79,41 @@ def train_evaluate_model(config, data_dir=None):
     df = pd.read_csv(f"{data_dir}/Data/data_for_NN_test.txt")
     X = df[[f"layer{i}" for i in range(1, IN_DIM + 1)]]
     y = df[["A1", "A2", "T1", "T2"]]
+    X = X.values
+    y = y.values
 
     scaler_x = MinMaxScaler(feature_range=(0, 1))
     scaler_y = MinMaxScaler(feature_range=(-1, 1))
     units = [config["hidden1"], config["hidden2"], config["hidden3"]]
     dropouts = [config["drop1"], config["drop2"], config["drop3"]]
     activations = ["relu", "relu", "relu"]  # [config["act1"],config["act2"],config["act3"]]
-    layers = 3 #  config["layers"]
-    model = get_model(units=units[0:layers], dropouts=dropouts[0:layers], activations=activations[0:layers],
+    layers = config["layers"]
+    kf = KFold(n_splits=SPLITS, shuffle=True, random_state=42)
+    mse = []
+    for fold_index, (train_index, test_index) in enumerate(kf.split(X, y)):
+        model = get_model(units=units[0:layers], dropouts=dropouts[0:layers], activations=activations[0:layers],
                       in_dim=IN_DIM, out_dim=OUT_DIM)
-    model.compile(loss='mse', optimizer=tf.keras.optimizers.Adam(learning_rate=config["lr"]), metrics=['mse', "mae"])
-    mse = run_k_fold(model, scaler_x, scaler_y, X.values, y.values, batch_size=config["batch"])
-    train.report({"loss": np.mean(mse)})
+        model.compile(loss='mse', optimizer=tf.keras.optimizers.Adam(learning_rate=config["lr"]), metrics=['mse', "mae"])
+        X_train, X_test, y_train, y_test = X[train_index, :], X[test_index, :], y[train_index], y[test_index]
+        X_train_sc = scaler_x.fit_transform(X_train)
+        X_test_sc = scaler_x.transform(X_test)
+        y_train_sc = scaler_y.fit_transform(y_train)
+        # y_test_sc = scaler_y.transform(y_test)
+
+        early_stop_cb = tf.keras.callbacks.EarlyStopping(monitor='loss',
+                                                         patience=EPOCHS_PATIENCE_ES)  # kdyz se to dany pocet epoch nezlepsi stopni
+        reduce_lr_cb = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=EPOCHS_PATIENCE_RP,
+                                                            min_lr=0.001)
+        model.fit(X_train_sc, y_train_sc, epochs=EPOCHS, validation_split=0.1, verbose=0,
+                  callbacks=[early_stop_cb, reduce_lr_cb], batch_size=config["batch"])  # validation_data=val_dataset,
+        # udelej predikci na testovacich datech
+        # data jsou preskalovana na puvodni rozmer, abych odstranil vliv intervalu skalovani
+        y_hat_sc = model.predict(X_test_sc, verbose=False)
+        y_hat = scaler_y.inverse_transform(y_hat_sc)
+        mse.append(mean_squared_error(y_test, y_hat))
+        train.report({"loss": np.mean(np.array(mse))})
+
+        train.report({"loss": np.mean(mse)})
 
     # print(f">>>>{np.mean(mse)}")  # vrat prumer za jednotlive foldy
 
@@ -112,7 +135,7 @@ def tune_mcregression():
         "drop1": tune.uniform(0.0, 0.5),
         "drop2": tune.uniform(0.0, 0.5),
         "drop3": tune.uniform(0.0, 0.5),
-        # "layers": tune.choice([1, 2, 3]),
+        "layers": tune.choice([1, 2, 3]),
         # "act1": tune.choice(["relu", "elu", "tanh"]),
         # "act2": tune.choice(["relu", "elu", "tanh"]),
         # "act3": tune.choice(["relu", "elu", "tanh"]),

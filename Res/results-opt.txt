@@ -1,0 +1,9 @@
+FULL OPT na 2000
+Best trial config: {'threads': 2, 'lr': 0.00012036859815351155, 'hidden1': 256, 'hidden2': 1024, 'hidden3': 128, 'drop1': 0.15830718614439288, 'drop2': 0.49860994013060445, 'drop3': 0.1840499730770619, 'layers': 3, 'act1': 'relu', 'act2': 'relu', 'act3': 'relu', 'batch': 128}
+Best trial final validation loss: 1.6063471714399484
+---------------------------------------------------------------------
+
+REFINE OPT na 500
+pouziva zjemneni>funkce relu, tri vrstvy
+Best trial config: {'threads': 2, 'lr': 0.0046960621671560026, 'hidden1': 512, 'hidden2': 512, 'hidden3': 32, 'drop1': 0.018132193582296008, 'drop2': 0.45436803276151244, 'drop3': 0.11645384684362792, 'batch': 512}
+Best trial final validation loss: 1.576559439731459
