@@ -1,0 +1,170 @@
+**-------------------------MLP regresor-------------------------**
+TRAIN MSE SCALED:0.003261030762546111
+CORR:0.9873048413269014
+CORR:0.9412525454426123
+CORR:0.986793853151398
+CORR:0.9958148680648871
+TEST MSE SCALED:0.003235847515699445
+CORR:0.9866116933603802
+CORR:0.9384995703537934
+CORR:0.9878564095089297
+CORR:0.9954407602484169
+MLP klasifikator  - koeficienty determinace
+TRAIN
+R2 A1_sc vs A1_hat_sc: 0.9610176368422175
+R2 A2_sc vs A2_hat_sc: 0.8682249426189971
+R2 T1_sc vs T1_hat_sc: 0.9468982712147127
+R2 T2_sc vs T2_hat_sc: 0.9738205103870379
+
+TEST
+R2 A1_sc vs A1_hat_sc: 0.9601888333496622
+R2 A2_sc vs A2_hat_sc: 0.8726183922762437
+R2 T1_sc vs T1_hat_sc: 0.9505765718913753
+R2 T2_sc vs T2_hat_sc: 0.9717831761784667
+
+Signal:
+1.3086969e+12 1.9466536e+09 1.8702956e-08 3.0300536e+00
+**----------------------XGBOOST regresor-----------------------**
+TRAIN MSE SCALED:0.000739664358195811
+CORR:0.9968349532316247
+CORR:0.9919881119576215
+CORR:0.995153320127381
+CORR:0.9985819397588783
+TEST MSE SCALED:0.005155383854920913
+CORR:0.9832359964117366
+CORR:0.9240695051162529
+CORR:0.9753225998949777
+CORR:0.9902181632409379
+
+TRAIN:
+R2 A1_sc vs A1_hat_sc: 0.9936155845732516
+R2 A2_sc vs A2_hat_sc: 0.983416610427149
+R2 T1_sc vs T1_hat_sc: 0.9901416401548032
+R2 T2_sc vs T2_hat_sc: 0.9971428027251518
+
+TEST:
+R2 A1_sc vs A1_hat_sc: 0.9667369415147182
+R2 A2_sc vs A2_hat_sc: 0.8538318291707729
+R2 T1_sc vs T1_hat_sc: 0.9503909874617814
+R2 T2_sc vs T2_hat_sc: 0.9802837853351065
+
+Produkuje na trénovacích i testovacích datech hodnoty mimo rozsah vstupních dat.
+signal:
+8.707330e+09  4.531976e+08 -7.845777e-02  4.481385e+00
+**-------------------------SVR regresor-------------------------**
+TRAIN MSE SCALED:0.0061656371752120505
+CORR:0.978810037626029
+CORR:0.9206517460769683
+CORR:0.9675475223939671
+CORR:0.9827840337607504
+TEST MSE SCALED:0.006272083616339165
+CORR:0.9783859304245385
+CORR:0.9177663770395358
+CORR:0.9688862528624688
+CORR:0.9823614955009982
+TRAIN
+R2 A1_sc vs A1_hat_sc: 0.957969654872773
+R2 A2_sc vs A2_hat_sc: 0.8460921624708152
+R2 T1_sc vs T1_hat_sc: 0.9342935363917684
+R2 T2_sc vs T2_hat_sc: 0.9641186036352347
+TEST
+R2 A1_sc vs A1_hat_sc: 0.957142726381294
+R2 A2_sc vs A2_hat_sc: 0.840520980582669
+R2 T1_sc vs T1_hat_sc: 0.9367389753518843
+R2 T2_sc vs T2_hat_sc: 0.9631837704481786
+
+signal
+1.88432506e+10 -3.33376577e+09 -5.02186165e+00 -4.25631504e+00
+
+
+**--JACCARDUV index MLP vs SVR--**
+Pres komponenty
+TRAIN
+Jaccard index: 0.3116346854505708
+Jaccard index: 0.6162825501346902
+Jaccard index: 0.3316892725030826
+Jaccard index: 0.20629956439182398
+
+TEST
+Jaccard index: 0.3001083423618635
+Jaccard index: 0.6150740242261103
+Jaccard index: 0.31004366812227074
+Jaccard index: 0.23329907502569372
+
+**----------meta model MLP s SVR----------**
+TRAIN MSE SCALED:0.0029327161132747114
+CORR:0.9839215731973164
+CORR:0.9334341604215286
+CORR:0.978387518103546
+CORR:0.9881989706522291
+TEST MSE SCALED:0.002900123876456442
+CORR:0.9836740907120092
+CORR:0.9357638535220069
+CORR:0.9798439527682267
+CORR:0.9876885708903522
+TRAIN R2
+component r2:0.9681011623748437
+component r2:0.8712678120785381
+component r2:0.9569747110873756
+component r2:0.976532212392697
+TEST R2
+component r2:0.9681011623748437
+component r2:0.8712678120785381
+component r2:0.9569747110873756
+component r2:0.976532212392697
+
+
+
+
+
+
+
+**********Jak se dari klasifikovat zda nastane chyba v komponente na treninkovych datech**********
+---------------err_A1_sc--------------------
+1.0
+0.9205555555555556
+              precision    recall  f1-score   support
+
+          OK       0.94      0.97      0.96      4878
+         BAD       0.63      0.44      0.52       522
+
+    accuracy                           0.92      5400
+   macro avg       0.78      0.71      0.74      5400
+weighted avg       0.91      0.92      0.91      5400
+
+---------------err_A2_sc--------------------
+0.9999794238683127
+0.9444444444444444
+              precision    recall  f1-score   support
+
+          OK       0.97      0.97      0.97      4851
+         BAD       0.72      0.74      0.73       549
+
+    accuracy                           0.94      5400
+   macro avg       0.84      0.86      0.85      5400
+weighted avg       0.95      0.94      0.94      5400
+
+---------------err_T1_sc--------------------
+0.9999794238683127
+0.9198148148148149
+              precision    recall  f1-score   support
+
+          OK       0.93      0.98      0.96      4864
+         BAD       0.67      0.37      0.48       536
+
+    accuracy                           0.92      5400
+   macro avg       0.80      0.68      0.72      5400
+weighted avg       0.91      0.92      0.91      5400
+
+---------------err_T2_sc--------------------
+1.0
+0.9275925925925926
+              precision    recall  f1-score   support
+
+          OK       0.96      0.96      0.96      4861
+         BAD       0.65      0.60      0.62       539
+
+    accuracy                           0.93      5400
+   macro avg       0.80      0.78      0.79      5400
+weighted avg       0.93      0.93      0.93      5400
+

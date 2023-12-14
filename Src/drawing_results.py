@@ -21,26 +21,28 @@ def draw_distribution(y, y_hat, label="Train", names=["A1", "A2", "T1", "T2"]):
     plt.rcParams['figure.figsize'] = [8, 8]
     fig, ax = plt.subplots(2, 2)
     name = names[0]
-    ax[0, 0].hist(y_hat[:, 0], bins=100, label=f"Computed distribution of {name}")
-    ax[0, 0].hist(y[:, 0], bins=100, label=f"Real distribution of {name}", alpha=0.5, color="red")
+    dc, nc, _ = ax[0, 0].hist(y_hat[:, 0], bins=100, label=f"Computed distribution of {name}", )
+    d, n, _ = ax[0, 0].hist(y[:, 0], bins=nc, label=f"Real distribution of {name}", alpha=0.5, color="red")
     ax[0, 0].legend()
     ax[0, 0].grid()
 
+
+
     name = names[1]
-    ax[0, 1].hist(y_hat[:, 1], bins=100, label=f"Computed distribution of {name}")
-    ax[0, 1].hist(y[:, 1], bins=100, label=f"Real distribution of {name}", alpha=0.5, color="red")
+    dc, nc, _=ax[0, 1].hist(y_hat[:, 1], bins=100, label=f"Computed distribution of {name}")
+    ax[0, 1].hist(y[:, 1], bins=nc, label=f"Real distribution of {name}", alpha=0.5, color="red")
     ax[0, 1].legend()
     ax[0, 1].grid()
 
     name = names[2]
-    ax[1, 0].hist(y_hat[:, 2], bins=100, label=f"Computed distribution of {name}")
-    ax[1, 0].hist(y[:, 2], bins=100, label=f"Real distribution of {name}", alpha=0.5, color="red")
+    dc, nc, _= ax[1, 0].hist(y_hat[:, 2], bins=100, label=f"Computed distribution of {name}")
+    ax[1, 0].hist(y[:, 2], bins=nc, label=f"Real distribution of {name}", alpha=0.5, color="red")
     ax[1, 0].legend()
     ax[1, 0].grid()
 
     name = names[3]
-    ax[1, 1].hist(y_hat[:, 3], bins=100, label=f"Computed distribution of {name}")
-    ax[1, 1].hist(y[:, 3], bins=100, label=f"Real distribution of {name}", alpha=0.5, color="red")
+    dc, nc, _= ax[1, 1].hist(y_hat[:, 3], bins=100, label=f"Computed distribution of {name}")
+    ax[1, 1].hist(y[:, 3], bins=nc, label=f"Real distribution of {name}", alpha=0.5, color="red")
     ax[1, 1].legend()
     ax[1, 1].grid()
 

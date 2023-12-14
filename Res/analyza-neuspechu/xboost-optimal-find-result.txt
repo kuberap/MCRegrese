@@ -1,0 +1,15 @@
+Použito grid search pro nalezení optimalich parametrů pro XGBoost
+Doba vypoctu cca 14 dnu.
+Nejlepší parametry:{'colsample_bytree': 0.9, 'eta': 0.05, 'max_depth': 9, 'n_estimators': 900, 'random_state': 42, 'subsample': 0.7}
+/home/kubera/MCRegrese/venv/lib/python3.9/site-packages/xgboost/core.py:160: UserWarning: [18:19:30] WARNING: /workspace/src/c_api/c_api.cc:1240: Saving into deprecated binary model format, please consider using `json` or `ubj`. Model format will default to JSON in XGBoost 2.2 if not specified.
+  warnings.warn(smsg, UserWarning)
+TRAIN MSE SCALED:0.0007335719874808978
+CORR:0.9967970318600728
+CORR:0.9920942602374482
+CORR:0.9952502412126075
+CORR:0.998560455456299
+TEST MSE SCALED:0.005126084722846717
+CORR:0.9836036240373226
+CORR:0.9244067243815038
+CORR:0.9753996187991656
+CORR:0.9901710992819341

@@ -22,6 +22,7 @@ if __name__ == "__main__":
     print(y.describe())
 
 
+
     for l in [10,10,1,0.1,0.01,0.001]:
         X_tr = (X ** l - 1) / l
         plt.hist(X_tr.iloc[:, 0], bins=100, label=f"Real distribution layer {l}", alpha=0.5, color="red")
