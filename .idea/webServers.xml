@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="71b4b5e8-3388-492c-b1da-8d23ab299986" name="kubera@groot.dc.fjfi.cvut.cz">
+        <fileTransfer accessType="SFTP" host="groot.dc.fjfi.cvut.cz" port="22" sshConfigId="f280dd8d-ceed-43cb-807b-6dd19d02a839" sshConfig="kubera@groot.dc.fjfi.cvut.cz:22 agent" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
